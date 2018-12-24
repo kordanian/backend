@@ -65,6 +65,16 @@ todoRoutes.route('/update/:id').post(function(req, res){
     })
 })
 
+todoRoutes.route('/delete/:id').post(function(req, res){
+    Todo.findByIdAndRemove(req.params.id, function(err, todo){
+        if (!todo)
+            res.status(404).send('data is not found')
+        else
+            console.log('deleted');
+            res.json('deleted');
+    })
+})
+
 app.use('/todos', todoRoutes);
 
 app.listen(PORT, function () {
